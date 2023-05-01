@@ -13,14 +13,14 @@ public class SetNavigationTarget : MonoBehaviour
     private GameObject navTargetObject;
 
     private NavMeshPath path;
-    private LineRenderer lineRenderer;
+    private LineRenderer line;
 
     private bool lineToggle = false;
 
     void Start()
     {
         path = new NavMeshPath();
-        lineRenderer = transform.GetComponent<LineRenderer>();
+        line = transform.GetComponent<LineRenderer>();
         
     }
 
@@ -34,9 +34,9 @@ public class SetNavigationTarget : MonoBehaviour
         if (lineToggle)
         {
             NavMesh.CalculatePath(transform.position, navTargetObject.transform.position, NavMesh.AllAreas, path);
-            lineRenderer.positionCount = path.corners.Length;
-            lineRenderer.SetPositions(path.corners);
-            lineRenderer.enabled = true;
+            line.positionCount = path.corners.Length;
+            line.SetPositions(path.corners);
+            line.enabled = true;
         }
     }
 }

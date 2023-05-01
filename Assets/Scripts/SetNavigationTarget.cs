@@ -15,28 +15,19 @@ public class SetNavigationTarget : MonoBehaviour
     private NavMeshPath path;
     private LineRenderer line;
 
-    private bool lineToggle = false;
+    private bool lineToggle = true;
 
     void Start()
     {
         path = new NavMeshPath();
         line = transform.GetComponent<LineRenderer>();
-        
     }
 
     void Update()
     {
-        if ((Input.touchCount > 0) && (Input.GetTouch(0).phase == TouchPhase.Began))
-        {
-            lineToggle = true;
-        }
-
-        if (lineToggle)
-        {
-            NavMesh.CalculatePath(transform.position, navTargetObject.transform.position, NavMesh.AllAreas, path);
-            line.positionCount = path.corners.Length;
-            line.SetPositions(path.corners);
-            line.enabled = true;
-        }
+        NavMesh.CalculatePath(transform.position, navTargetObject.transform.position, NavMesh.AllAreas, path);
+        line.positionCount = path.corners.Length;
+        line.SetPositions(path.corners);
+        line.enabled = true;
     }
 }
